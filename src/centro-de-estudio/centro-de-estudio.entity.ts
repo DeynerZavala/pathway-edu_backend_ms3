@@ -7,10 +7,14 @@ export class CentroDeEstudio {
   centroDeEstudios_id: string;
   @Column({ length: 255 })
   nombre: string;
-  @Column('int')
-  globalRanking: number;
-  @Column('int')
-  nationalRanking: number;
+  @Column({ length: 255 })
+  globalRanking: string;
+  @Column({ length: 255 })
+  nationalRanking: string;
+  @Column('text')
+  link: string;
+  @Column('text')
+  image: string;
   @OneToMany(
     () => AreaCentroDeEstudio,
     (areaCentroDeEstudio) => areaCentroDeEstudio.centroDeEstudio,

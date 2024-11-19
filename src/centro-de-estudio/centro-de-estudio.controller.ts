@@ -1,44 +1,49 @@
-// centro-de-estudios.controller.ts
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Param,
-  Put,
-  Delete,
-} from '@nestjs/common';
+// centro-de-estudio.controller.ts
+import { Controller } from '@nestjs/common';
+import { MessagePattern } from '@nestjs/microservices';
 import { CentroDeEstudioService } from './centro-de-estudio.service';
-import { CentroDeEstudio } from './centro-de-estudio.entity';
 
-@Controller('centro-de-estudios')
+@Controller()
 export class CentroDeEstudioController {
   constructor(
-    private readonly centroDeEstudiosService: CentroDeEstudioService,
+    private readonly centroDeEstudioService: CentroDeEstudioService,
   ) {}
 
-  @Post()
-  create(@Body() centro: CentroDeEstudio) {
-    return this.centroDeEstudiosService.create(centro);
+  @MessagePattern({ cmd: 'create_centro_de_estudio' })
+  async create(data: {
+    nombre: string;
+    globalRanking: string;
+    nationalRanking: string;
+    link: string;
+    image: string;
+  }) {
+    return await this.centroDeEstudioService.create(data);
   }
 
-  @Get()
-  findAll() {
-    return this.centroDeEstudiosService.findAll();
+  @MessagePattern({ cmd: 'get_all_centros_de_estudio' })
+  async findAll() {
+    return await this.centroDeEstudioService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.centroDeEstudiosService.findOne(id);
+  @MessagePattern({ cmd: 'get_centro_de_estudio_by_id' })
+  async findOne(id: string) {
+    return await this.centroDeEstudioService.findOne(id);
   }
 
-  @Put(':id')
-  update(@Param('id') id: string, @Body() centro: Partial<CentroDeEstudio>) {
-    return this.centroDeEstudiosService.update(id, centro);
+  @MessagePattern({ cmd: 'update_centro_de_estudio' })
+  async update(data: {
+    id: string;
+    nombre?: string;
+    globalRanking?: string;
+    nationalRanking?: string;
+    link?: string;
+    image?: string;
+  }) {
+    return await this.centroDeEstudioService.update(data.id, data);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.centroDeEstudiosService.remove(id);
+  @MessagePattern({ cmd: 'delete_centro_de_estudio' })
+  async remove(id: string) {
+    return await this.centroDeEstudioService.remove(id);
   }
 }
