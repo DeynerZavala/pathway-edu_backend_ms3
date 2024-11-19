@@ -1,10 +1,7 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-
-import { CentroDeEstudiosModule } from './centro-de-estudios/centro-de-estudios.module';
-import { AreaUniversidadModule } from './area-centro-de-estudios/area-centro-de-estudios.module';
+import { CentroDeEstudioModule } from './centro-de-estudio/centro-de-estudio.module';
+import { AreaCentroDeEstudioModule } from './area-centro-de-estudio/area-centro-de-estudio.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
@@ -34,10 +31,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         };
       },
     }),
-    CentroDeEstudiosModule,
-    AreaUniversidadModule,
+    CentroDeEstudioModule,
+    AreaCentroDeEstudioModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}

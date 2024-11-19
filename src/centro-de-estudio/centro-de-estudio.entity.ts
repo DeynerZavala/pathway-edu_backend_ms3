@@ -1,4 +1,4 @@
-import { AreaCentroDeEstudio } from '../area-centro-de-estudios/area-centro-de-estudios.entity';
+import { AreaCentroDeEstudio } from '../area-centro-de-estudio/area-centro-de-estudio.entity';
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
 @Entity('centro-de-estudios')
